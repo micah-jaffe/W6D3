@@ -1,0 +1,7 @@
+<form action="/tweets" method="POST">
+  <% follow_state = @user.follows?(User.find(params[:user_id])) ? 'followed' : 'unfollowed' %>
+  
+  <button class="follow-toggle" type="button" name="button" initial-follow-state="<%= follow_state %>" user-id=<%= params[:user_id] %>>
+  </button>
+  
+</form>
