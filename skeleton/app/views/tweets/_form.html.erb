@@ -1,7 +1,27 @@
-<% follow_state = current_user.follows?(user) ? 'followed' : 'unfollowed' %>
+<h2>New Tweet!</h2>
+<form action="/tweets" method="POST">
+  <input
+      type="hidden"
+      name="authenticity_token"
+      value="<%= form_authenticity_token %>">
 
+  <label>
+    Content
+    <textarea name="tweet[content]"></textarea>
+  </label>
+  <br>
 
-<button class="follow-toggle" type="button" name="button" data-initial-follow-state="<%= follow_state %>" data-user-id=<%= user.id %>>
-</button>
+  <label>
+    Mention
+    <select name="tweet[mentioned_user_ids][]">
+      <option></option>
+      <% User.all.each do |user| %>
+        <option value="<%= user.id %>"><%= user.username %></option>
+      <% end %>
+    </select>
+  </label>
+  <br>
 
+  <input type="Submit" value="Post Tweet!">
+</form>
 
