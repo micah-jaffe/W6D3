@@ -1,1 +1,16 @@
-/* PHASE 11: Icons */
+[class*="icon-"] {
+  background-image: url('../images/sprite.png');
+  background-size: 25px 25px;
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  /* overflow: hidden; */
+}
+
+.content-header-add-friend {
+  overflow: hidden;
+}
+
+.icon-add-friend {
+  background-position: 0 -150px;
+}
