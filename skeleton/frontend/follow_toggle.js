@@ -25,7 +25,6 @@ class FollowToggle {
   }
   
   handleClick() {
-    // debugger;
     this.$el.on('click', e => {
       e.preventDefault();
       if (this.followState === "unfollowed") {

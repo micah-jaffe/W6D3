@@ -149,7 +149,6 @@ class FollowToggle {
   }
   
   handleClick() {
-    // debugger;
     this.$el.on('click', e => {
       e.preventDefault();
       if (this.followState === "unfollowed") {
@@ -187,7 +186,6 @@ module.exports = FollowToggle;
 const FollowToggle = __webpack_require__(/*! ./follow_toggle.js */ "./frontend/follow_toggle.js");
 
 $(function() {
-  // debugger;
   $('button.follow-toggle').each((idx, el) => {
     return new FollowToggle(el);
   });
