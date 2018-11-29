@@ -108,6 +108,18 @@ const APIUtil = {
       url: `/users/${id}/follow`,
       dataType: 'json'
     });
+  },
+  
+  searchUsers: (queryVal, success) => {
+    return $.ajax({
+      url: `/users/search`,
+      data: {
+        query: `${queryVal}`
+      },
+      // query: `${queryVal}`,
+      // // data: `${queryVal}`,
+      dataType: 'json'
+    });
   }
 };
 
@@ -184,12 +196,55 @@ module.exports = FollowToggle;
 /***/ (function(module, exports, __webpack_require__) {
 
 const FollowToggle = __webpack_require__(/*! ./follow_toggle.js */ "./frontend/follow_toggle.js");
+const UsersSearch = __webpack_require__(/*! ./users_search.js */ "./frontend/users_search.js")
 
 $(function() {
   $('button.follow-toggle').each((idx, el) => {
     return new FollowToggle(el);
   });
+  
+  $('.users-search').each((idx, el) => {
+    return new UsersSearch(el);
+  });
 });
+
+/***/ }),
+
+/***/ "./frontend/users_search.js":
+/*!**********************************!*\
+  !*** ./frontend/users_search.js ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+const APIUtil = __webpack_require__(/*! ./api_util.js */ "./frontend/api_util.js");
+
+class UsersSearch {
+  constructor(el) {
+    this.$el = $(el);
+    this.$input = $(this.$el.children()[0]);
+    this.$ul = $(this.$el.children()[1]);
+    
+    this.handleInput();
+  }
+  
+  handleInput() {
+    this.$input.change(e => {
+      e.preventDefault();
+      // console.log(e.target.value);
+      // debugger;
+      APIUtil.searchUsers(e.target.value)
+      .then((res) => {
+        console.log(res);
+        res.forEach(user => {
+          this.$ul.append(`<li>${user.username}</li>`);
+        });
+      });
+    });
+  }
+}
+
+module.exports = UsersSearch;
 
 /***/ })
 
